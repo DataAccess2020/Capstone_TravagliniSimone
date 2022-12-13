@@ -17,7 +17,7 @@ italian_cdx = lists_members(
   list_id = "1602429027561750528",
   owner_user = NULL,
   slug = NULL,
-  n = 17,
+  n = 42,
   cursor = "-1",
   token = NULL,
   retryonratelimit = TRUE,
@@ -31,7 +31,8 @@ italian_cdx = lists_members(
 list_italian_cdx = c(italian_cdx$screen_name)
 
 list_italian_cdx[2] #i try to see the second name in the list, in order to see if all is ok
-
+## ok, now i have the list of the most important candidate an politicians from the right coalitions
+#the nest task will be download the tweet
 
 
 
