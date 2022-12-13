@@ -26,7 +26,11 @@ italian_cdx = lists_members(
   
 )
 
+# Create a string with the cdx profile account
 
+list_italian_cdx = c(italian_cdx$screen_name)
+
+list_italian_cdx[2] #i try to see the second name in the list, in order to see if all is ok
 
 
 
