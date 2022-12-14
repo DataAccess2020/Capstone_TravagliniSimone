@@ -11,7 +11,7 @@ dxcoalition_tweet <- rtweet::get_timeline(retryonratelimit = T,
   ) %>% 
   dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
 
-## it retorns me a list with only 463 tweets. probably there are some issues
+## it give me back me a list with only 463 tweets. probably there are some issues
 ## now i try with m56
 list_italian_m5s <- c(italian_m5s$screen_name)
 list_italian_m5s
