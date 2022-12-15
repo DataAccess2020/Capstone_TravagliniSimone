@@ -42,10 +42,21 @@ salvini_tweet <- rtweet::get_timeline(retryonratelimit = T,
                                           parse = T,
 ) %>% 
   dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
-Sys.sleep(0.5)
+
 
 #ok, by setting the since_id and the max_id with tweet id it seems works, but i have
 #to set also the n, otherwise the function downloads only 100 tweets.
+
+cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
+                                      user = list_italian_cdx,
+                                      n = 3000,
+                                      since_id = since,
+                                      max_id = max,
+                                      verbose = T, 
+                                      parse = T,
+) %>% 
+  dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+#with those setting, gives me back 7765 tweets.
 
 
 
