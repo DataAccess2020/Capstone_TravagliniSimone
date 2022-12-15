@@ -28,3 +28,25 @@ dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
 
 
 #give me back only 400 tweets.
+#now i try setting up since_id and max_id, only for matteosalvinimi account.-----
+#for instance, i set the id of a tweet of 25/07 and a tweet of 23/09
+
+since <- "1551558900247314435"
+max <- "1573269167305854976"
+salvini_tweet <- rtweet::get_timeline(retryonratelimit = T,
+                                          user = list_italian_cdx[31], 
+                                          n = 2000,
+                                          since_id = since,
+                                          max_id = max,
+                                          verbose = T, 
+                                          parse = T,
+) %>% 
+  dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+Sys.sleep(0.5)
+
+#ok, by setting the since_id and the max_id with tweet id it seems works, but i have
+#to set also the n, otherwise the function downloads only 100 tweets.
+
+
+
+
