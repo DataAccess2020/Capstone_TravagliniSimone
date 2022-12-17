@@ -53,6 +53,47 @@ cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
 ) %>% 
   dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
 #with those setting, gives me back 11195 tweets. i think it is the right one
+# now i can try with others lists.
+
+#csx-----
+csx_tweet <- rtweet::get_timeline(retryonratelimit = T,
+                                  user = list_italian_csx,
+                                  n = Inf,
+                                  since_id = since,
+                                  max_id = max,
+                                  verbose = T, 
+                                  parse = T,
+) %>% 
+  dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+
+#movimento5stelle-----
+m5s_tweet <- rtweet::get_timeline(retryonratelimit = T,
+                                  user = list_italian_m5s,
+                                  n = Inf,
+                                  include_rts = TRUE,
+                                  since_id = since,
+                                  max_id = max,
+                                  verbose = T, 
+                                  parse = T,
+) %>% 
+  dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+
+#terzo polo-----
+terzopolo_tweet <- rtweet::get_timeline(retryonratelimit = T,
+                                  user = list_italian_terzopolo,
+                                  n = Inf,
+                                  since_id = since,
+                                  max_id = max,
+                                  verbose = T, 
+                                  parse = T,
+) %>% 
+  dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+
+
+
+
+
+
 
 
 
