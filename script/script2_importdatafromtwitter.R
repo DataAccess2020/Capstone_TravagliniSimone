@@ -68,21 +68,21 @@ italian_m5s = lists_members(
 #i'll try tomorrow
 
 ##prove-----
-# Create a string with the cdx profile account
+# Create a string with the profile account
 
 list_italian_cdx = c(italian_cdx$screen_name)
+list_italian_csx = c(italian_csx$screen_name)
+list_italian_m5s = c(italian_m5s$screen_name)
+list_italian_terzopolo = c(italian_terzopolo$screen_name)
+
 
 list_italian_cdx[2] #i try to see the second name in the list, in order to see if all is ok
 ## ok, now i have the list of the most important candidate and politicians from the right coalition
 #the next task will be download the tweet
-#prova 1
 
-tweet__prova_senborgonzoni <- rtweet::get_timeline(user = list_italian_cdx[1], n = 100, verbose = T, parse = T)
 
-#%>% 
-#dyplr::filter(created_at > "2022-06-01" & created_at <= "2022-09-23")
-#here above i set a filter to download only the tweets from june to september 23rd,
-#in order to analyze only tweets from electoral campaign.
+
+
 
 
 

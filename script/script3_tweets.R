@@ -13,12 +13,9 @@ dxcoalition_tweet <- rtweet::get_timeline(retryonratelimit = T,
 
 ## it give me back me a list with only 463 tweets. probably there are some issues
 ## now i try with m56
-list_italian_m5s <- c(italian_m5s$screen_name)
-list_italian_m5s
 
 m5s_tweet <- rtweet::get_timeline(retryonratelimit = T,
                                            user = list_italian_m5s[1:35],
-                                           
                                            since_id = NULL,
                                            max_id = NULL,
                                            verbose = T, 
@@ -34,8 +31,7 @@ dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
 since <- "1551558900247314435"
 max <- "1573269167305854976"
 salvini_tweet <- rtweet::get_timeline(retryonratelimit = T,
-                                          user = list_italian_cdx[31], 
-                                          n = 2000,
+                                          user = list_italian_cdx[31],
                                           since_id = since,
                                           max_id = max,
                                           verbose = T, 
@@ -49,14 +45,14 @@ salvini_tweet <- rtweet::get_timeline(retryonratelimit = T,
 
 cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
                                       user = list_italian_cdx,
-                                      n = 3000,
+                                      n = Inf,
                                       since_id = since,
                                       max_id = max,
                                       verbose = T, 
                                       parse = T,
 ) %>% 
   dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
-#with those setting, gives me back 7765 tweets.
+#with those setting, gives me back 11195 tweets. i think it is the right one
 
 
 
