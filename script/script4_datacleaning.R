@@ -20,4 +20,15 @@ italian_terzopolo <- select(italian_terzopolo, c(1, 2, 3, 5, 8, 9, 10, 12, 17))
 #m5s
 italian_m5s <- select(italian_m5s, c(1, 2, 3, 5, 8, 9, 10, 12, 17))
 
+## export tweet
+## before i need to select only the columns i need
+cdx_tweet <- select(cdx_tweet, c(1, 2, 3, 4, 6, 8))
+csx_tweet <- select(csx_tweet, c(1, 2, 3, 4, 6, 8))
+m5s_tweet <- select(m5s_tweet, c(1, 2, 3, 4, 6, 8))
+terzopolo_tweet <- select(terzopolo_tweet, c(1, 2, 3, 4, 6, 8))
 
+#now i can extract the data
+write.csv(cdx_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\cdx_tweet.csv", row.names=FALSE)
+write.csv(csx_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\csx_tweet.csv", row.names=FALSE)
+write.csv(m5s_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\m5s_tweet.csv", row.names=FALSE)
+write.csv(terzopolo_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\terzopolo_tweet.csv", row.names=FALSE)
