@@ -21,12 +21,14 @@ str_view_all(list_cdx_tweet,
              pattern = "#\\S+")
 
 #probably "#\\S+" is the right one
-
+## cdx----
 hashtag_cdx <- str_extract_all(list_cdx_tweet, pattern = "#\\S+.")  
-hashtag_csx <- str_extract_all(list_csx_tweet, pattern = "#\\S+.")  
-hashtag_m5s <- str_extract_all(list_m5s_tweet, pattern = "#\\S+.") 
+## csx----
+hashtag_csx <- str_extract_all(list_csx_tweet, pattern = "#\\S+.")
+## m5s----
+hashtag_m5s <- str_extract_all(list_m5s_tweet, pattern = "#\\S+.")
+## terzopolo----
 hashtag_terzopolo <- str_extract_all(list_terzopolo_tweet, pattern = "#\\S+.")  
-
 
 
 
