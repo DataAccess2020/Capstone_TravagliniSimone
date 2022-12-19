@@ -16,11 +16,23 @@ list_terzopolo_tweet
 #select the right regex.
 library(stringr)
 
-str_view_all(list_cdx_tweet, pattern = "#\\S+")
+str_view_all(list_cdx_tweet,
+             list_csx_tweet,
+             pattern = "#\\S+")
 
 #probably "#\\S+" is the right one
 
-str_extract_all(list_cdx_tweet, pattern = "#\\S+.")
-str_extract_all(list_csx_tweet, pattern = "#\\S+")
+hashtag_cdx <- str_extract_all(list_cdx_tweet, pattern = "#\\S+.")  
+hashtag_csx <- str_extract_all(list_csx_tweet, pattern = "#\\S+.")  
+hashtag_m5s <- str_extract_all(list_m5s_tweet, pattern = "#\\S+.") 
+hashtag_terzopolo <- str_extract_all(list_terzopolo_tweet, pattern = "#\\S+.")  
+
+
+
+
+
+
+
+
 
 
