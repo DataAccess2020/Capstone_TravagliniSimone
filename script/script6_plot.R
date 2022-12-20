@@ -23,9 +23,12 @@ matrix <- as.matrix(dtm)
 words <- sort(rowSums(matrix),decreasing=TRUE) 
 df <- data.frame(word = names(words),freq=words)
 
+#now i have a top 20 of hashtag from cdx
+topcdx <- head(df, 20)
+
 set.seed(1234) # for reproducibility 
-wordcloud(words = df$word, freq = df$freq, min.freq = 1,
-          max.words=400, random.order=FALSE, rot.per=0.35,
+wordcloud(words = topcdx$word, freq = topcdx$freq, min.freq = 1,
+          max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 #ok, now i can export the image
 ## second plot, csx----
@@ -46,18 +49,13 @@ words <- sort(rowSums(matrix),decreasing=TRUE)
 df <- data.frame(word = names(words),freq=words)
 
 set.seed(1234) # for reproducibility 
-wordcloud(words = wordscsx$word, freq = wordscsx$freq, min.freq = 1,
-          max.words=100, random.order=FALSE, rot.per=0.55,
+wordcloud(words = topcsx$word, freq = topcsx$freq, min.freq = 1,
+          max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"))
 
-wordscsx <- head(df, 20)
+topcsx <- head(df, 20)
 #i can also create a barplot with the 20 hashtags most popular
 
-ggplot(wordscsx, aes(x = freq)) +
-  geom_histogram(alpha = 0.2, col = "black", fill = "blue") +
-  xlab("hashtags") +
-  ylab("Count") +
-  theme_bw()
 
 ## m5s----
 tweet_m5s <- unlist(hashtag_m5s)
@@ -76,9 +74,11 @@ words <- sort(rowSums(matrix),decreasing=TRUE)
 df <- data.frame(word = names(words),freq=words)
 
 set.seed(1234) # for reproducibility 
-wordcloud(words = df$word, freq = df$freq, min.freq = 1,
-          max.words=100, random.order=FALSE, rot.per=0.35,
+wordcloud(words = topm5s$word, freq = topm5s$freq, min.freq = 1,
+          max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(1, "Dark2"))
+
+topm5s <- head(df, 20)
 
 ### terzopolo-----
 tweet_tp <- unlist(hashtag_terzopolo)
@@ -96,7 +96,30 @@ matrix <- as.matrix(dtm)
 words <- sort(rowSums(matrix),decreasing=TRUE) 
 df <- data.frame(word = names(words),freq=words)
 
+
 set.seed(1234) # for reproducibility 
-wordcloud(words = df$word, freq = df$freq, min.freq = 1,
-          max.words=500, random.order=FALSE, rot.per=0.35,
+wordcloud(words = toptp$word, freq = toptp$freq, min.freq = 1,
+          max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
+
+toptp <- head(df, 20)
+
+# i can also do the barplot:
+barplot(topcdx$freq, names.arg = topcdx$word, las=2,
+        col=c(2:5), 
+        cex.axis=0.8, cex.names=0.8) ## cdx
+
+
+barplot(topcsx$freq, names.arg = topcsx$word, las=2,
+        col=c(3:8), 
+        cex.axis=0.8, cex.names=0.8) ## csx
+
+barplot(topm5s$freq, names.arg = topm5s$word, las=2,
+        col=c(2:4), 
+        cex.axis=0.8, cex.names=0.8) ## m5s
+
+barplot(toptp$freq, names.arg = toptp$word, las=2,
+        col=c(5:7), 
+        cex.axis=0.8, cex.names=0.8) ## cdx
+
+
