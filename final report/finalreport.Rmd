@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Twitter during electoral campaign: most discussed topics by italian parties"
 author: "Simone Travaglini"
 date: "2022-12-22"
 output: html_document
@@ -103,6 +103,7 @@ list_italian_terzopolo = c(italian_terzopolo$screen_name)
 ## SCRAPING OF TWEETS
 
 After importing the profiles into the data frames, the first thing I did was to create lists containing only the screen_name for each coalition.
+
 ```{r, eval=FALSE}
 library(rtweet)
 library(tidyverse)
@@ -114,10 +115,12 @@ list_italian_m5s = c(italian_m5s$screen_name)
 list_italian_terzopolo = c(italian_terzopolo$screen_name)
 
 ```
+
 This was useful because I needed the ids to download the tweets of each politician.
 The main problem in this process was setting up a filter, so that i could only get tweets from july to september.
 The first method was to set up only the filter with dplyr, but that didn't work. Next, i had to set the since_id and max_id in the function get_timeline and n = Inf. 
 In order to do that i took 2 tweets by the Matteo Salvini twitter account.
+
 ```{r, eval=FALSE}
 since <- "1551558900247314435"
 max <- "1573269167305854976"
@@ -154,11 +157,12 @@ terzopolo_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_Tra
 
 ```
 
-## Get hashtag
+## GET THE HASHTAGS
 
 After analyzing the tables containing the tweets I decided that the best way to get hashtags was to use a regular expression. 
 To achieve the goal I then proceeded to create 4 objects containing the lists of all tweets through the unlist function. 
 After that i used the str_view_all and str_extract_all functions to see and export all the hashtags. finally I put them into objects called hashtag_cdx, hashtag_csx, hashtag_m5s and hashtag_terzopolo.
+
 ```{r, eval=FALSE}
 list_cdx_tweet <- unlist(cdx_tweet$full_text)
 list_cdx_tweet
@@ -191,8 +195,10 @@ hashtag_terzopolo <- str_extract_all(list_terzopolo_tweet, pattern = "#\\S+.")
 
 ```
 
-After having taken all the hashtags of all the coalitions, the next step is that of the actual analysis. in order to analyze I decided to create wordclouds from the tables of the most used words as hashtags. these tables show, in ascending order, the hashtags most used by the coalitions during the electoral campaign period.
-```{r, eval=FALSE}
+After having taken all the hashtags of all the coalitions, the next step is that of the actual analysis. in order to analyze I decided to create wordclouds from the tables of the most used words as hashtags. 
+These tables show, in ascending order, the hashtags most used by the coalitions during the electoral campaign period.
+
+```{r, eval=FALSE, echo=FALSE}
 
 library(wordcloud)
 
@@ -294,7 +300,8 @@ wordcloud(words = df2$word, freq = df2$freq, min.freq = 10,
 ```
 
 As we can see from the graphs above, the most used hashtags are green-left alliance and in any case those related to the environment and ecology (climate crisis, regasification terminals and ecological transition above all). however, there are also references to political opponents (especially Meloni, Salvini and Calenda).
-Another fundamental point of the electoral campaign for the left was the right for homosexuals and the lgbt community. as seen in the wordcloud among the hashtags there are "egalitarian marriage" "lgbt" and "rights".
+Another fundamental point of the electoral campaign for the left was the right for homosexuals and the lgbt community. 
+As seen in the wordcloud among the hashtags there are "egalitarian marriage" "lgbt" and "rights".
 In the graph below instead we can see the 20 most used hashtags by the coalition:
 The first one was "alleanzaverdisinistra", used more then 1000 times.
 
@@ -327,7 +334,8 @@ wordcloud(words = df$word, freq = df$freq, min.freq = 6,
 
 ```
 
-The graphs show that the words most used by right-wing coalition politicians are those referring to voting for a reference party (lega, fdi and forza italia), but there are also hashtags referring to the main points of their electoral campaign (presidentialism, flat tax). one of the main ones is the hashtag #credo, launched precisely on the occasion of the elections by the leader of the Lega Matteo Salvini.
+The graphs show that the words most used by right-wing coalition politicians are those referring to voting for a reference party (lega, fdi and forza italia), but there are also hashtags referring to the main points of their electoral campaign (presidentialism, flat tax). 
+One of the main ones is the hashtag #credo, launched precisely on the occasion of the elections by the leader of the Lega Matteo Salvini.
 In the graph below instead we can see the 30 most used hashtags by the coalition:
 the first was #credo, that was mentioned more than 500 times.
 
@@ -396,7 +404,12 @@ wordcloud(words = df4$word, freq = df4$freq, min.freq = 6,
 
 ```
 
-The slogan of the third pole coalition for the 2022 elections was "italia seriously", which was one of the most used hashtags in the period. in addition to this, the candidates expressed their views on infrastructure, health and justice reform. also in this case we find references to political opponents, but in this circumstance, the candidates of the third pole referred above all to Berlusconi and Di Maio.
+The slogan of the third pole coalition for the 2022 elections was "italia seriously", which was one of the most used hashtags in the period. 
+In addition to this, the candidates expressed their views on infrastructure, health and justice reform. 
+Also in this case we find references to political opponents, but in this circumstance, the candidates of the third pole referred above all to Berlusconi and Di Maio.
+
+In the graph below instead we can see the 30 most used hashtags by the coalition:
+the first was #italiasulserio, that was mentioned more than 1200 times. Another interesting thing is to find #Draghi as the third most used hashtag. Probably in reference to the fact that they were satisfied with Draghi's performance as head of government and wanted to continue their political action in that direction.
 
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
@@ -414,4 +427,9 @@ barplot(toptp$freq, names.arg = toptp$word, las=2,
 ## CONCLUSION
 
 In conclusion, we can say that, all the coalitions have used the twitter channels to talk about their key points on the political agenda, or to refer to and attack their political opponents. from this analysis that only took into consideration the hashtags, I could only understand the topic in question, but not the message that was wanted to be sent.
+During this electoral campaign, it has been seen that the parties have had a good deal of activity within their twitter accounts, despite the proximity between the day on which president Mattarella proclaimed the dissolution of the chambers and the elections.
+The actual period was therefore only 2 months. 
 
+One consideration that i feel I must make, however, is that in a historical period such as the one in which we live, it is possible to say that the classic electoral campaign no longer exists. 
+I mean that anyone with a twitter profile or any other social media profile can see that most of the Italian political class appears in a perennial political campaign, with the aim of acquiring new voters and maintaining virtual relations with those already acquired.
+That said, it is probable that even extending the search outside of this time period, we would have found the same topics among the tweets of the analysed politicians.
