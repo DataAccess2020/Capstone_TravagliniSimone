@@ -20,5 +20,20 @@ The lists were composed as follows:
 3) m5s: 69 members
 4) third pole: 35 members
 
+The lists were created to make the work easier for me, and then import the various tweets divided by coalition.
+Once this is done, the goal will be to create tables with tweets from 23 July until 24 September (the day before the elections) and extract hashtags from all tweets to see which are the most used in this period by each political group.
 
+## Scraping of tweets
+After importing the profiles into the data frames, the first thing I did was to create lists containing only the screen_name for each coalition.
+```{r setup, eval=FALSE}
+library(rtweet)
+library(tidyverse)
+library(dplyr)
 
+list_italian_cdx = c(italian_cdx$screen_name)
+list_italian_csx = c(italian_csx$screen_name)
+list_italian_m5s = c(italian_m5s$screen_name)
+list_italian_terzopolo = c(italian_terzopolo$screen_name)
+
+```
+This was useful because I needed the ids to download the tweets of each politician.
