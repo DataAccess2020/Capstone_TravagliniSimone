@@ -100,11 +100,11 @@ tweet_tp1 <- tm_map(tweet_tp1, removeWords, stopwords("english"))
 
 dtm4 <- TermDocumentMatrix(tweet_tp1) 
 matrix4 <- as.matrix(dtm4) 
-words4 <- sort(rowSums(matrix),decreasing=TRUE) 
+words4 <- sort(rowSums(matrix4),decreasing=TRUE) 
 df4 <- data.frame(word = names(words4),freq=words4)
 
 
-wordcloud(words4 = df4$word, freq = df4$freq, min.freq = 15,
+wordcloud(words = df4$word, freq = df4$freq, min.freq = 15,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"),
           scale=c(2,0.60))
