@@ -57,10 +57,45 @@ cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
 
 Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions. The partial output was a dataframe for each coalition containing all the tweets. I then proceeded to export these tables in csv format which I saved in a new folder called "data".
 
-```{r}
+```{r setup, eval=FALSE}
 write.csv(cdx_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\cdx_tweet.csv", row.names=FALSE)
 write.csv(csx_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\csx_tweet.csv", row.names=FALSE)
 write.csv(m5s_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\m5s_tweet.csv", row.names=FALSE)
 write.csv(terzopolo_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\terzopolo_tweet.csv", row.names=FALSE)
+```
+
+After analyzing the tables containing the tweets I decided that the best way to get hashtags was to use a regular expression. 
+To achieve the goal I then proceeded to create 4 objects containing the lists of all tweets through the unlist function. 
+After that i used the str_view_all and str_extract_all functions to see and export all the hashtags. finally I put them into objects called hashtag_cdx, hashtag_csx, hashtag_m5s and hashtag_terzopolo.
+```{r setup, eval=FALSE}
+list_cdx_tweet <- unlist(cdx_tweet$full_text)
+list_cdx_tweet
+
+list_csx_tweet <- unlist(csx_tweet$full_text)
+list_csx_tweet
+
+list_m5s_tweet <- unlist(m5s_tweet$full_text)
+list_m5s_tweet
+
+list_terzopolo_tweet <- unlist(terzopolo_tweet$full_text)
+list_terzopolo_tweet
+
+# open package
+library(stringr)
+
+#view if the regex is right
+str_view_all(list_cdx_tweet,
+             pattern = "#\\S+.")
+
+#probably "#\\S+." is the right one
+## cdx----
+hashtag_cdx <- str_extract_all(list_cdx_tweet, pattern = "#\\S+.")  
+## csx----
+hashtag_csx <- str_extract_all(list_csx_tweet, pattern = "#\\S+.")
+## m5s----
+hashtag_m5s <- str_extract_all(list_m5s_tweet, pattern = "#\\S+.")
+## terzopolo----
+hashtag_terzopolo <- str_extract_all(list_terzopolo_tweet, pattern = "#\\S+.")  
+
 ```
 
