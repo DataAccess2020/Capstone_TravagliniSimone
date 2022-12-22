@@ -52,6 +52,15 @@ cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
                                       parse = T,
 ) %>% 
   dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+
 ```
 
-Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions.
+Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions. The partial output was a dataframe for each coalition containing all the tweets. I then proceeded to export these tables in csv format which I saved in a new folder called "data".
+
+```{r}
+write.csv(cdx_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\cdx_tweet.csv", row.names=FALSE)
+write.csv(csx_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\csx_tweet.csv", row.names=FALSE)
+write.csv(m5s_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\m5s_tweet.csv", row.names=FALSE)
+write.csv(terzopolo_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\terzopolo_tweet.csv", row.names=FALSE)
+```
+
