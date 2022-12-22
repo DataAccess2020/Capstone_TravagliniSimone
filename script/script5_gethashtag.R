@@ -17,9 +17,9 @@ list_terzopolo_tweet
 library(stringr)
 
 str_view_all(list_cdx_tweet,
-             pattern = "#\\S+")
+             pattern = "#\\S+.")
 
-#probably "#\\S+" is the right one
+#probably "#\\S+." is the right one
 ## cdx----
 hashtag_cdx <- str_extract_all(list_cdx_tweet, pattern = "#\\S+.")  
 ## csx----
