@@ -37,3 +37,21 @@ list_italian_terzopolo = c(italian_terzopolo$screen_name)
 
 ```
 This was useful because I needed the ids to download the tweets of each politician.
+The main problem in this process was setting up a filter, so that i could only get tweets from july to september.
+The first method was to set up only the filter with dplyr, but that didn't work. Next, i had to set the since_id and max_id in the function get_timeline and n = Inf. 
+In order to do that i took 2 tweets by the Matteo Salvini twitter account.
+```{r setup, eval=FALSE}
+since <- "1551558900247314435"
+max <- "1573269167305854976"
+cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
+                                      user = list_italian_cdx,
+                                      n = Inf,
+                                      since_id = since,
+                                      max_id = max,
+                                      verbose = T, 
+                                      parse = T,
+) %>% 
+  dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
+```
+
+Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions.
