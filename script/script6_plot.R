@@ -5,11 +5,13 @@ library(RColorBrewer)
 install.packages("wordcloud2")
 library(wordcloud2)
 
-#create a corpus
+
 install.packages("tm")
 library(tm)
+library(dplyr)
 
-
+## cdx----
+#create a corpus
 tweet_dx <- unlist(hashtag_cdx)
 tweet_dx1 <- Corpus(VectorSource(tweet_dx))
 
@@ -38,7 +40,7 @@ wordcloud(words = topcdx$word, freq = topcdx$freq, min.freq = 1,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"))
 #ok, now i can export the image
-## second plot, csx----
+##csx----
 
 tweet_sx <- unlist(hashtag_csx)
 tweet_sx1 <- Corpus(VectorSource(tweet_sx))
@@ -55,7 +57,6 @@ matrix2 <- as.matrix(dtm2)
 words2 <- sort(rowSums(matrix2),decreasing=TRUE) 
 df2 <- data.frame(word = names(words2),freq=words2)
 
-set.seed(1234) # for reproducibility 
 wordcloud(words = df2$word, freq = df2$freq, min.freq = 20,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"),
@@ -87,7 +88,7 @@ wordcloud(words3 = df3$word, freq = df3$freq, min.freq = 8,
           scale=c(2,0.60))
 topm5s <- head(df3, 20)
 
-### terzopolo-----
+## terzopolo-----
 tweet_tp <- unlist(hashtag_terzopolo)
 tweet_tp1 <- Corpus(VectorSource(tweet_tp))
 
@@ -108,21 +109,22 @@ wordcloud(words = df4$word, freq = df4$freq, min.freq = 15,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(8, "Dark2"),
           scale=c(2,0.60))
-# top 20 hashtag for terzo polo 
+#top 20 hashtag for terzo polo 
 toptp <- head(df4, 20)
 
-# i can also do the barplot:
+## barplot----
 barplot(topcdx$freq, names.arg = topcdx$word, las=2,
         col=c(2:5), 
         cex.axis=0.8, cex.names=0.8) ## cdx
 
 
-barplot(topcsx$freq, names.arg = topcsx$word, las=2,
+barplot(top_csx$freq, names.arg = top_csx$word, las=2,
         col=c(3:8), 
-        cex.axis=0.8, cex.names=0.8) ## csx
+        cex.axis=0.8, cex.names=0.8) %>% 
+head(top_csx, 20) ## csx
 
-barplot(topm5s$freq, names.arg = topm5s$word, las=2,
-        col=c(2:4), 
+barplot(top_csx$freq, names.arg = top_csx$word, las=2,
+        col=c(2:4),
         cex.axis=0.8, cex.names=0.8) ## m5s
 
 barplot(toptp$freq, names.arg = toptp$word, las=2,

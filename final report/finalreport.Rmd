@@ -10,12 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = "C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\script")
 ```
 
-## Introduction:
+## INTRODUCTION:
 
 On 21 July 2022 the president of the Republic **Sergio Mattarella** proclaimed the dissolution of parliament, following the resignation presented by prime minister Mario Draghi. early elections were called for 25 september: in those months, therefore, the parties began their electoral campaign.
 Said that, this brief analysis aims to see which topics were most discussed by the main political actors and the candidates for the Chamber of Deputies and the Senate. in order to do so, I will use the twitter profiles, both personal and of the political parties of the main coalitions: **right coalition, left coalition, 5 star movement and Azione-Italia Viva**.
 
-## Methodology:
+## METHODOLOGY:
 
 As mentioned in the introduction, to do this I analysed the twitter profiles of Italian political actors. 
 The first step in this analysis was to search for the various profiles and insert them, via my twitter profile, within 4 different lists, each concerning a coalition.
@@ -100,7 +100,7 @@ list_italian_terzopolo = c(italian_terzopolo$screen_name)
 ```
 
 
-## Scraping of tweets
+## SCRAPING OF TWEETS
 
 After importing the profiles into the data frames, the first thing I did was to create lists containing only the screen_name for each coalition.
 ```{r, eval=FALSE}
@@ -133,7 +133,9 @@ cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
 
 ```
 
-Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions. The partial output was a dataframe for each coalition containing all the tweets. I then proceeded to export these tables in csv format which I saved in a new folder called "data".
+Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions.
+The partial output was a dataframe for each coalition containing all the tweets. 
+I then proceeded to export these tables in csv format which I saved in a new folder called "data".
 
 ```{r, eval=FALSE}
 #export data
@@ -198,6 +200,8 @@ library(RColorBrewer)
 
 library(wordcloud2)
 
+## cdx----
+
 #create a corpus
 
 library(tm)
@@ -220,7 +224,7 @@ words <- sort(rowSums(matrix),decreasing=TRUE)
 df <- data.frame(word = names(words),freq=words)
 
 
-## second plot, csx----
+## csx----
 
 tweet_sx <- unlist(hashtag_csx)
 tweet_sx1 <- Corpus(VectorSource(tweet_sx))
@@ -271,7 +275,8 @@ df4 <- data.frame(word = names(words4),freq=words4)
 
 ```
 
-## Output analysis:
+
+## OUTPUT ANALYSIS:
 
 ***LEFT COALITION:***
 
@@ -298,6 +303,8 @@ topcsx <- head(df2, 30)
 barplot(topcsx$freq, names.arg = topcsx$word, las=2,
         col=c(3:8), 
         cex.axis=0.8, cex.names=0.7)
+
+
 ```
 
 
@@ -315,6 +322,9 @@ wordcloud(words = df$word, freq = df$freq, min.freq = 6,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"),
           scale=c(2,0.60))
+
+
+
 ```
 
 The graphs show that the words most used by right-wing coalition politicians are those referring to voting for a reference party (lega, fdi and forza italia), but there are also hashtags referring to the main points of their electoral campaign (presidentialism, flat tax). one of the main ones is the hashtag #credo, launched precisely on the occasion of the elections by the leader of the Lega Matteo Salvini.
@@ -326,6 +336,8 @@ topcdx <- head(df, 30)
 barplot(topcdx$freq, names.arg = topcdx$word, las=2,
         col=c(3:8), 
         cex.axis=0.8, cex.names=0.7)
+
+
 
 ```
 
@@ -343,21 +355,31 @@ wordcloud(words = df3$word, freq = df3$freq, min.freq = 2,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"),
           scale=c(2,0.60))
+
+
+
 ```
 
 As regards the analysis of the 5-star movement, I must say that I found a principal difficulty: the candidates of the movement (except for a few cases) did not use twitter much during the electoral campaign.
 Although the list was large enough, I was able to export only 2760 tweets.
 However we can say that, from the analysis of these hashtags, the one most used by far was "on the right side". 
-secondly, the others were those referring to basic income and the minimum wage, but also young people and expensive bills. also in this case we find references to political opponents, first of all Meloni and Calenda.
+Secondly, the others were those referring to basic income and the minimum wage, but also young people and expensive bills. 
+Also in this case we find references to political opponents, first of all Meloni and Calenda.
+As we can see from the plots here below, the hashtag "#dallapartegiusta" was vastly more used than the others, more than 6 times more than the second one:
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 topm5s <- head(df3, 30)
 barplot(topm5s$freq, names.arg = topm5s$word, las=2,
         col=c(3:8), 
         cex.axis=0.8, cex.names=0.7)
+
+
+
 ```
 
+
 ***TERZO POLO ANALYSIS:***
+
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 library(wordcloud2)
 library(wordcloud)
@@ -369,6 +391,9 @@ wordcloud(words = df4$word, freq = df4$freq, min.freq = 6,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"),
           scale=c(2,0.60))
+
+
+
 ```
 
 The slogan of the third pole coalition for the 2022 elections was "italia seriously", which was one of the most used hashtags in the period. in addition to this, the candidates expressed their views on infrastructure, health and justice reform. also in this case we find references to political opponents, but in this circumstance, the candidates of the third pole referred above all to Berlusconi and Di Maio.
@@ -379,10 +404,14 @@ toptp <- head(df4, 30)
 barplot(toptp$freq, names.arg = toptp$word, las=2,
         col=c(3:8), 
         cex.axis=0.8, cex.names=0.7)
+
+
+
 ```
 
 
 
 ## CONCLUSION
-in conclusion, we can say that, all the coalitions have used the twitter channels to talk about their key points on the political agenda, or to refer to and attack their political opponents. from this analysis that only took into consideration the hashtags, I could only understand the topic in question, but not the message that was wanted to be sent.
+
+In conclusion, we can say that, all the coalitions have used the twitter channels to talk about their key points on the political agenda, or to refer to and attack their political opponents. from this analysis that only took into consideration the hashtags, I could only understand the topic in question, but not the message that was wanted to be sent.
 

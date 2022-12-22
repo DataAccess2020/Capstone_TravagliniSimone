@@ -47,7 +47,7 @@ write.csv(df3,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\
 write.csv(df4,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagtp.csv", row.names=FALSE)
 
 #import
-top_cdx <- read.csv(df,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcdx.csv", row.names=FALSE)
-top_csx <- read.csv(df2,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcsx.csv", row.names=FALSE)
-top_m5s <- read.csv(df3,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagm5s.csv", row.names=FALSE)
-top_tp <- read.csv(df4,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagtp.csv", row.names=FALSE)
+top_cdx <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcdx.csv")
+df2 <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcsx.csv")
+top_m5s <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagm5s.csv")
+top_tp <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagtp.csv")
