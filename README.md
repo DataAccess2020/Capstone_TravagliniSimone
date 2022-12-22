@@ -9,5 +9,5 @@ Research question: what were the most discussed topics on twitter by italian coa
 # FOLDER STRUCTURE:
 - Script: it contains our .R scripts
 - Junk: it contains plots, data or script that aren't right
-- Output: it contains the final report in Rmarkdown and html
+- Final report: it contains the final report in Rmarkdown and html
 - Data: it contains .csv files with dataframe i used for the research
