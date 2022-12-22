@@ -26,7 +26,7 @@ dplyr::filter(created_at > "2022-07-25" & created_at <="2022-09-24")
 
 #give me back only 400 tweets.
 #now i try setting up since_id and max_id, only for matteosalvinimi account.-----
-#for instance, i set the id of a tweet of 25/07 and a tweet of 23/09
+#for instance, i set the id of a tweet of 25/07 and a tweet of 24/09
 
 since <- "1551558900247314435"
 max <- "1573269167305854976"

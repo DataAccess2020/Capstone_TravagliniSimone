@@ -17,7 +17,6 @@ list_terzopolo_tweet
 library(stringr)
 
 str_view_all(list_cdx_tweet,
-             list_csx_tweet,
              pattern = "#\\S+")
 
 #probably "#\\S+" is the right one
