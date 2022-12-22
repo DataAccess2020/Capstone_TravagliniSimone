@@ -198,7 +198,7 @@ hashtag_terzopolo <- str_extract_all(list_terzopolo_tweet, pattern = "#\\S+.")
 After having taken all the hashtags of all the coalitions, the next step is that of the actual analysis. in order to analyze I decided to create wordclouds from the tables of the most used words as hashtags. 
 These tables show, in ascending order, the hashtags most used by the coalitions during the electoral campaign period.
 
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE}
 
 library(wordcloud)
 
