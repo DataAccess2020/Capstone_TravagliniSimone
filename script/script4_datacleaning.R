@@ -40,3 +40,14 @@ csx_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_Travaglin
 m5s_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\m5s_tweet.csv")
 terzopolo_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\terzopolo_tweet.csv")
 
+#i export also the data for plot, in order to make a better final report----
+write.csv(df,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcdx.csv", row.names=FALSE)
+write.csv(df2,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcsx.csv", row.names=FALSE)
+write.csv(df3,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagm5s.csv", row.names=FALSE)
+write.csv(df4,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagtp.csv", row.names=FALSE)
+
+#import
+top_cdx <- read.csv(df,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcdx.csv", row.names=FALSE)
+top_csx <- read.csv(df2,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcsx.csv", row.names=FALSE)
+top_m5s <- read.csv(df3,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagm5s.csv", row.names=FALSE)
+top_tp <- read.csv(df4,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagtp.csv", row.names=FALSE)
