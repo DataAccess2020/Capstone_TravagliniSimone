@@ -16,13 +16,17 @@ tweet_dx1 <- tweet_dx1 %>%
   tm_map(removePunctuation) %>%
   tm_map(stripWhitespace)
 tweet_dx1 <- tm_map(tweet_dx1, content_transformer(tolower))
-tweet_dx1 <- tm_map(tweet_dx1, removeWords)
+tweet_dx1 <- tm_map(tweet_dx1, removeWords = FALSE)
 
 dtm <- TermDocumentMatrix(tweet_dx1) 
 matrix <- as.matrix(dtm) 
 words <- sort(rowSums(matrix),decreasing=TRUE) 
 df <- data.frame(word = names(words),freq=words)
 
+wordcloud(words = df$word, freq = df$freq, min.freq = 20,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(2,0.40))
 #now i have a top 20 of hashtag from cdx
 topcdx <- head(df, 20)
 
@@ -40,8 +44,9 @@ tweet_sx1 <- tweet_sx1 %>%
   tm_map(removeNumbers) %>%
   tm_map(removePunctuation) %>%
   tm_map(stripWhitespace)
+
 tweet_sx1 <- tm_map(tweet_sx1, content_transformer(tolower))
-tweet_sx1 <- tm_map(tweet_sx1, removeWords)
+
 
 dtm <- TermDocumentMatrix(tweet_sx1) 
 matrix <- as.matrix(dtm) 
@@ -49,9 +54,10 @@ words <- sort(rowSums(matrix),decreasing=TRUE)
 df <- data.frame(word = names(words),freq=words)
 
 set.seed(1234) # for reproducibility 
-wordcloud(words = topcsx$word, freq = topcsx$freq, min.freq = 1,
+wordcloud(words = df$word, freq = df$freq, min.freq = 20,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(10, "Dark2"))
+          colors=brewer.pal(10, "Dark2"),
+          scale=c(2,0.60))
 
 topcsx <- head(df, 20)
 #i can also create a barplot with the 20 hashtags most popular
@@ -73,11 +79,10 @@ matrix <- as.matrix(dtm)
 words <- sort(rowSums(matrix),decreasing=TRUE) 
 df <- data.frame(word = names(words),freq=words)
 
-set.seed(1234) # for reproducibility 
-wordcloud(words = topm5s$word, freq = topm5s$freq, min.freq = 1,
-          max.words=Inf, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(1, "Dark2"))
-
+wordcloud(words = df$word, freq = df$freq, min.freq = 8,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(1, "Dark2"),
+          scale=c(2,0.60))
 topm5s <- head(df, 20)
 
 ### terzopolo-----
@@ -97,11 +102,11 @@ words <- sort(rowSums(matrix),decreasing=TRUE)
 df <- data.frame(word = names(words),freq=words)
 
 
-set.seed(1234) # for reproducibility 
-wordcloud(words = toptp$word, freq = toptp$freq, min.freq = 1,
+wordcloud(words = df$word, freq = df$freq, min.freq = 15,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
-          colors=brewer.pal(8, "Dark2"))
-
+          colors=brewer.pal(8, "Dark2"),
+          scale=c(2,0.60))
+# top 20 hashtag for terzo polo 
 toptp <- head(df, 20)
 
 # i can also do the barplot:
