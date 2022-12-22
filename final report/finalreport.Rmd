@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+author: "Simone Travaglini"
+date: "2022-12-22"
+output: html_document
+---
+
+## Introduction:
+
+On 21 July 2022 the president of the Republic **Sergio Mattarella** proclaimed the dissolution of parliament, following the resignation presented by prime minister Mario Draghi. early elections were called for 25 september: in those months, therefore, the parties began their electoral campaign.
+Said that, this brief analysis aims to see which topics were most discussed by the main political actors and the candidates for the Chamber of Deputies and the Senate. in order to do so, I will use the twitter profiles, both personal and of the political parties of the main coalitions: **right coalition, left coalition, 5 star movement and Azione-Italia Viva**.
+
+## Methodology:
+
+As mentioned in the introduction, to do this I analysed the twitter profiles of Italian political actors. 
+The first step in this analysis was to search for the various profiles and insert them, via my twitter profile, within 4 different lists, each concerning a coalition.
+The lists were composed as follows:
+1) right coalition: 80 members
+2) left coalition: 70 members
+3) m5s: 69 members
+4) third pole: 35 members
+
+
+
