@@ -273,7 +273,7 @@ df4 <- data.frame(word = names(words4),freq=words4)
 
 ## Output analysis:
 
-***Left coalition:***
+***LEFT COALITION:***
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 library(wordcloud2)
@@ -282,15 +282,16 @@ library(RColorBrewer)
 
 df2 <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagcsx.csv")
 
-wordcloud(words = df2$word, freq = df2$freq, min.freq = 6,
+wordcloud(words = df2$word, freq = df2$freq, min.freq = 10,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"),
           scale=c(2,0.60))
 ```
 
-as we can see from the graphs above, the most used hashtags are green-left alliance and in any case those related to the environment and ecology (climate crisis, regasification terminals and ecological transition above all). however, there are also references to political opponents (especially Meloni, Salvini and Calenda).
+As we can see from the graphs above, the most used hashtags are green-left alliance and in any case those related to the environment and ecology (climate crisis, regasification terminals and ecological transition above all). however, there are also references to political opponents (especially Meloni, Salvini and Calenda).
 Another fundamental point of the electoral campaign for the left was the right for homosexuals and the lgbt community. as seen in the wordcloud among the hashtags there are "egalitarian marriage" "lgbt" and "rights".
 In the graph below instead we can see the 20 most used hashtags by the coalition:
+The first one was "alleanzaverdisinistra", used more then 1000 times.
 
 ```{r,message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 topcsx <- head(df2, 30)
@@ -344,8 +345,8 @@ wordcloud(words = df3$word, freq = df3$freq, min.freq = 2,
           scale=c(2,0.60))
 ```
 
-as regards the analysis of the 5-star movement, I must say that I found a principal difficulty: the candidates of the movement (except for a few cases) did not use twitter much during the electoral campaign.
-Although the list was large enough, I was only able to export 2760 tweets.
+As regards the analysis of the 5-star movement, I must say that I found a principal difficulty: the candidates of the movement (except for a few cases) did not use twitter much during the electoral campaign.
+Although the list was large enough, I was able to export only 2760 tweets.
 However we can say that, from the analysis of these hashtags, the one most used by far was "on the right side". 
 secondly, the others were those referring to basic income and the minimum wage, but also young people and expensive bills. also in this case we find references to political opponents, first of all Meloni and Calenda.
 
@@ -364,13 +365,14 @@ library(RColorBrewer)
 
 df4 <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\top_hashtagtp.csv")
 
-wordcloud(words = df4$word, freq = df4$freq, min.freq = 2,
+wordcloud(words = df4$word, freq = df4$freq, min.freq = 6,
           max.words=Inf, random.order=FALSE, rot.per=0.35,
           colors=brewer.pal(10, "Dark2"),
           scale=c(2,0.60))
 ```
 
 The slogan of the third pole coalition for the 2022 elections was "italia seriously", which was one of the most used hashtags in the period. in addition to this, the candidates expressed their views on infrastructure, health and justice reform. also in this case we find references to political opponents, but in this circumstance, the candidates of the third pole referred above all to Berlusconi and Di Maio.
+
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 toptp <- head(df4, 30)
@@ -381,6 +383,6 @@ barplot(toptp$freq, names.arg = toptp$word, las=2,
 
 
 
-##CONCLUSION
+## CONCLUSION
 in conclusion, we can say that, all the coalitions have used the twitter channels to talk about their key points on the political agenda, or to refer to and attack their political opponents. from this analysis that only took into consideration the hashtags, I could only understand the topic in question, but not the message that was wanted to be sent.
 
