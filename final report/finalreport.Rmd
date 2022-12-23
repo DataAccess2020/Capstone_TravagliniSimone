@@ -20,13 +20,16 @@ Said that, this brief analysis aims to see which topics were most discussed by t
 As mentioned in the introduction, to do this I analysed the twitter profiles of Italian political actors. 
 The first step in this analysis was to search for the various profiles and insert them, via my twitter profile, within 4 different lists, each concerning a coalition.
 The lists were composed as follows:
-1) right coalition: 80 members
-2) left coalition: 70 members
-3) m5s: 69 members
-4) third pole: 35 members
+1) *right coalition:* 80 members --> https://twitter.com/i/lists/1602429027561750528
+2) *left coalition:* 66 members --> https://twitter.com/i/lists/1602661051400654850
+3) *m5s:* 61 members --> https://twitter.com/i/lists/1602433071604801537
+4) *third pole:* 35 members --> https://twitter.com/i/lists/1602680072506408960
 
 The lists were created to make the work easier for me, and then import the various tweets divided by coalition.
 Once this is done, the goal will be to create tables with tweets from 23 July until 24 September (the day before the elections) and extract hashtags from all tweets to see which are the most used in this period by each political group.
+To do this analysis I decided to use the rtweet package.
+In particular I used the functions lists_members to import lists and get_timeline to be able to download tweets from a specific period (in this case July-September).
+
 ```{r, eval=FALSE}
 library(rtweet)
 library(tidyverse)
@@ -86,10 +89,13 @@ italian_m5s = lists_members(
   verbose = TRUE,
   
 )
-#lists are not completed, cause twitter dont let me finish (probably caused by a temporal block)
-#i'll try tomorrow
+```
 
-##prove-----
+
+After importing the lists from twitter i had to create objects with lists of all the politicians' names using the unlist function.
+These lists were dataframes containing a lot of information that i did not need. What i was interested in was the $screen_name.
+
+```{r, eval=FALSE}
 # Create a string with the profile account
 
 list_italian_cdx = c(italian_cdx$screen_name)
@@ -148,14 +154,6 @@ write.csv(m5s_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniS
 write.csv(terzopolo_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\terzopolo_tweet.csv", row.names=FALSE)
 ```
 
-```{r, eval=FALSE}
-#import data
-cdx_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\cdx_tweet.csv")
-csx_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\csx_tweet.csv")
-m5s_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\m5s_tweet.csv")
-terzopolo_tweet <- read.csv("C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\data\\terzopolo_tweet.csv")
-
-```
 
 ## GET THE HASHTAGS
 
