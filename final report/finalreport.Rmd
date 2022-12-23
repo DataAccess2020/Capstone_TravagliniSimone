@@ -5,6 +5,10 @@ date: "2022-12-22"
 output: html_document
 ---
 
+GitHub repository link: https://github.com/DataAccess2020/Capstone_TravagliniSimone
+
+GitHub statistics: number of commit --> 51
+
 ```{r setup, include=F}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = "C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_TravagliniSimone\\script")
