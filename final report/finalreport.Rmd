@@ -20,14 +20,18 @@ Said that, this brief analysis aims to see which topics were most discussed by t
 As mentioned in the introduction, to do this I analysed the twitter profiles of Italian political actors. 
 The first step in this analysis was to search for the various profiles and insert them, via my twitter profile, within 4 different lists, each concerning a coalition.
 The lists were composed as follows:
-1) *right coalition:* 80 members --> https://twitter.com/i/lists/1602429027561750528
-2) *left coalition:* 66 members --> https://twitter.com/i/lists/1602661051400654850
-3) *m5s:* 61 members --> https://twitter.com/i/lists/1602433071604801537
-4) *third pole:* 35 members --> https://twitter.com/i/lists/1602680072506408960
+
+1) **Right coalition:** 80 members --> https://twitter.com/i/lists/1602429027561750528
+
+2) **Left coalition:** 66 members --> https://twitter.com/i/lists/1602661051400654850
+
+3) **M5s:** 61 members --> https://twitter.com/i/lists/1602433071604801537
+
+4) **Third pole:** 35 members --> https://twitter.com/i/lists/1602680072506408960
 
 The lists were created to make the work easier for me, and then import the various tweets divided by coalition.
-Once this is done, the goal will be to create tables with tweets from 23 July until 24 September (the day before the elections) and extract hashtags from all tweets to see which are the most used in this period by each political group.
-To do this analysis I decided to use the rtweet package.
+Once this is done, the goal will be to create tables with tweets from **23 July** until **24 September** (the day before the elections) and extract hashtags from all tweets to see which are the most used in this period by each political group.
+To do this analysis I decided to use the **rtweet package**.
 In particular I used the functions lists_members to import lists and get_timeline to be able to download tweets from a specific period (in this case July-September).
 
 ```{r, eval=FALSE}
@@ -92,23 +96,10 @@ italian_m5s = lists_members(
 ```
 
 
-After importing the lists from twitter i had to create objects with lists of all the politicians' names using the unlist function.
-These lists were dataframes containing a lot of information that i did not need. What i was interested in was the $screen_name.
+## DATA PROCESSING FOR ANALYSIS
 
-```{r, eval=FALSE}
-# Create a string with the profile account
-
-list_italian_cdx = c(italian_cdx$screen_name)
-list_italian_csx = c(italian_csx$screen_name)
-list_italian_m5s = c(italian_m5s$screen_name)
-list_italian_terzopolo = c(italian_terzopolo$screen_name)
-
-```
-
-
-## SCRAPING OF TWEETS
-
-After importing the profiles into the data frames, the first thing I did was to create lists containing only the screen_name for each coalition.
+After importing the lists from twitter i had to create objects with lists of all the politicians' names using the *unlist* function.
+These lists were *data frames* containing a lot of information that i did not need. What i was interested in was the **$screen_name**.
 
 ```{r, eval=FALSE}
 library(rtweet)
@@ -124,7 +115,7 @@ list_italian_terzopolo = c(italian_terzopolo$screen_name)
 
 This was useful because I needed the ids to download the tweets of each politician.
 The main problem in this process was setting up a filter, so that i could only get tweets from july to september.
-The first method was to set up only the filter with dplyr, but that didn't work. Next, i had to set the since_id and max_id in the function get_timeline and n = Inf. 
+The first method was to set up only the filter with dplyr, but that didn't work. Next, i had to set the since_id and max_id in the function *get_timeline* and *n = Inf.* 
 In order to do that i took 2 tweets by the Matteo Salvini twitter account.
 
 ```{r, eval=FALSE}
@@ -144,7 +135,7 @@ cdx_tweet <- rtweet::get_timeline(retryonratelimit = T,
 
 Thanks to this, I was able to download only the tweets of the period that interested me and I therefore also replied for the other coalitions.
 The partial output was a dataframe for each coalition containing all the tweets. 
-I then proceeded to export these tables in csv format which I saved in a new folder called "data".
+I then proceeded to export these tables in csv format which I saved in a new folder called **"data"**.
 
 ```{r, eval=FALSE}
 #export data
@@ -157,9 +148,10 @@ write.csv(terzopolo_tweet,"C:\\Users\\trava\\OneDrive\\Documenti\\Capstone_Trava
 
 ## GET THE HASHTAGS
 
-After analyzing the tables containing the tweets I decided that the best way to get hashtags was to use a regular expression. 
+After analyzing the tables containing the tweets I decided that the best way to get hashtags was to use a *regular expression*. 
+The regular expression i found was **"#\\S+."**
 To achieve the goal I then proceeded to create 4 objects containing the lists of all tweets through the unlist function. 
-After that i used the str_view_all and str_extract_all functions to see and export all the hashtags. finally I put them into objects called hashtag_cdx, hashtag_csx, hashtag_m5s and hashtag_terzopolo.
+After that i used the *str_view_all* and *str_extract_all* functions to see and export all the hashtags. finally I put them into objects called **hashtag_cdx, hashtag_csx, hashtag_m5s** and **hashtag_terzopolo**.
 
 ```{r, eval=FALSE}
 list_cdx_tweet <- unlist(cdx_tweet$full_text)
@@ -194,7 +186,7 @@ hashtag_terzopolo <- str_extract_all(list_terzopolo_tweet, pattern = "#\\S+.")
 ```
 
 After having taken all the hashtags of all the coalitions, the next step is that of the actual analysis. in order to analyze I decided to create wordclouds from the tables of the most used words as hashtags. 
-These tables show, in ascending order, the hashtags most used by the coalitions during the electoral campaign period.
+These tables show, in ascending order, the hashtags most used by the coalitions during the electoral campaign period. 
 
 ```{r, eval=FALSE}
 
@@ -233,6 +225,7 @@ df <- data.frame(word = names(words),freq=words)
 tweet_sx <- unlist(hashtag_csx)
 tweet_sx1 <- Corpus(VectorSource(tweet_sx))
 
+#remove the symbol # and punctation
 tweet_sx1 <- tweet_sx1 %>%
   tm_map(removeNumbers) %>%
   tm_map(removePunctuation) %>%
@@ -249,6 +242,7 @@ df2 <- data.frame(word = names(words2),freq=words2)
 tweet_m5s <- unlist(hashtag_m5s)
 tweet_m5s1 <- Corpus(VectorSource(tweet_m5s))
 
+#remove the symbol # and punctation
 tweet_m5s1 <- tweet_m5s1 %>%
   tm_map(removeNumbers) %>%
   tm_map(removePunctuation) %>%
@@ -265,6 +259,7 @@ df3 <- data.frame(word = names(words3),freq=words3)
 tweet_tp <- unlist(hashtag_terzopolo)
 tweet_tp1 <- Corpus(VectorSource(tweet_tp))
 
+#remove the symbol # and punctation
 tweet_tp1 <- tweet_tp1 %>%
   tm_map(removeNumbers) %>%
   tm_map(removePunctuation) %>%
@@ -297,11 +292,15 @@ wordcloud(words = df2$word, freq = df2$freq, min.freq = 10,
           scale=c(2,0.60))
 ```
 
-As we can see from the graphs above, the most used hashtags are green-left alliance and in any case those related to the environment and ecology (climate crisis, regasification terminals and ecological transition above all). however, there are also references to political opponents (especially Meloni, Salvini and Calenda).
+As we can see from the graphs above, the most used hashtags are green-left alliance and in any case those related to the environment and ecology (*climate crisis, regasification terminals* and *ecological transition* above all). however, there are also references to political opponents (especially **Meloni, Salvini** and **Calenda**).
 Another fundamental point of the electoral campaign for the left was the right for homosexuals and the lgbt community. 
-As seen in the wordcloud among the hashtags there are "egalitarian marriage" "lgbt" and "rights".
-In the graph below instead we can see the 20 most used hashtags by the coalition:
-The first one was "alleanzaverdisinistra", used more then 1000 times.
+As seen in the wordcloud among the hashtags there are **"egalitarian marriage" "lgbt"** and **"rights"**.
+In the graph below instead we can see the 30 most used hashtags by the coalition:
+The first one was *"alleanzaverdisinistra"*, used more then 1000 times.
+It would also be interesting to understand why this hashtag was used so many times. Most likely, the party candidates were the most active in the campaign, compared to the other coalition members.
+As for the other hashtags, the most mentioned political enemy was Meloni, a member of Fratelli d'Italia and a member of the right-wing coalition.
+Among the 30 most used hashtags also appear labour, climate crisis, extra profits and high utility bills, topics that have always been close to the Italian left.
+
 
 ```{r,message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 topcsx <- head(df2, 30)
@@ -333,9 +332,13 @@ wordcloud(words = df$word, freq = df$freq, min.freq = 6,
 ```
 
 The graphs show that the words most used by right-wing coalition politicians are those referring to voting for a reference party (lega, fdi and forza italia), but there are also hashtags referring to the main points of their electoral campaign (presidentialism, flat tax). 
-One of the main ones is the hashtag #credo, launched precisely on the occasion of the elections by the leader of the Lega Matteo Salvini.
+One of the main ones is the hashtag #credo, launched on the occasion of the elections by the leader of the Lega Matteo Salvini.
 In the graph below instead we can see the 30 most used hashtags by the coalition:
-the first was #credo, that was mentioned more than 500 times.
+the first was #credo, that was mentioned more than 500 times. 
+With regard to the other hashtags, the most used were those referring to the parties in the coalition (***Lega, Fratelli d'Italia, Forza Italia, Noi Noderati***) or to the leaders of the parties (**Meloni, Berlusconi, Salvini**). 
+In general, there were few references to the issues close to the italian right, but they were much more personalised. 
+Another hashtag that was used a lot was *'Pontida'*, the place of the historic meeting of lega supporters. 
+With regard to political opponents, the most mentioned was *Enrico Letta*.
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, eval=TRUE}
 topcdx <- head(df, 30)
@@ -366,12 +369,13 @@ wordcloud(words = df3$word, freq = df3$freq, min.freq = 2,
 
 ```
 
-As regards the analysis of the 5-star movement, I must say that I found a principal difficulty: the candidates of the movement (except for a few cases) did not use twitter much during the electoral campaign.
-Although the list was large enough, I was able to export only 2760 tweets.
-However we can say that, from the analysis of these hashtags, the one most used by far was "on the right side". 
-Secondly, the others were those referring to basic income and the minimum wage, but also young people and expensive bills. 
-Also in this case we find references to political opponents, first of all Meloni and Calenda.
-As we can see from the plots here below, the hashtag "#dallapartegiusta" was vastly more used than the others, more than 6 times more than the second one:
+As regards the analysis of the Movimento 5 stelle, I must say that I found a principal difficulty: the candidates of the movement (except for a few cases) did not use twitter much during the electoral campaign.
+Although the list was large enough, I was able to export only **2760** tweets.
+However we can say that, from the analysis of these hashtags, the one most used by far was **"dalla parte giusta"**. 
+Secondly, the others were those referring to *basic income* and *the minimum wage*, but also *young people* and *expensive bills*. 
+Also in this case we find references to political opponents, first of all *Meloni* and *Calenda*, but also *Renzi* and *Letta*.
+As we can see from the plots here below, the hashtag **"#dallapartegiusta"** was vastly more used than the others, more than 6 times more than the second one. 
+These were the themes most frequently used during the election campaign. I would say that, in many aspects, the Movimento 5 stelle was very close to the themes of the left: it talked about young people, high bills costs (especially for the poorer segments of the population), citizenship income (introduced by the party itself during the last legislature) and the minimum wage.
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
 topm5s <- head(df3, 30)
@@ -402,12 +406,12 @@ wordcloud(words = df4$word, freq = df4$freq, min.freq = 6,
 
 ```
 
-The slogan of the third pole coalition for the 2022 elections was "italia seriously", which was one of the most used hashtags in the period. 
-In addition to this, the candidates expressed their views on infrastructure, health and justice reform. 
-Also in this case we find references to political opponents, but in this circumstance, the candidates of the third pole referred above all to Berlusconi and Di Maio.
+The slogan of the third pole coalition for the 2022 elections was "**Italia sul serio**", which was one of the most used hashtags in the period. 
+In addition to this, the candidates expressed their views on *infrastructure*, *health* and *justice reform*. 
+Also in this case we find references to political opponents, but in this circumstance, the candidates of the third pole referred above all to **Berlusconi** and **Di Maio**.
 
 In the graph below instead we can see the 30 most used hashtags by the coalition:
-the first was #italiasulserio, that was mentioned more than 1200 times. Another interesting thing is to find #Draghi as the third most used hashtag. Probably in reference to the fact that they were satisfied with Draghi's performance as head of government and wanted to continue their political action in that direction.
+the first was **#italiasulserio**, that was mentioned more than 1200 times. Another interesting thing is to find *#Draghi* as the third most used hashtag. Probably in reference to the fact that they were satisfied with Draghi's performance as head of government and wanted to continue their political action in that direction.
 
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE}
